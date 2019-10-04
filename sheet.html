@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+    <style>
+        body {
+            font-family: 'Aclonica';
+            font-size: 22px;
+        }
+        
+        td {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #444444;
+        }
+        
+        .emptytd {
+            padding: 5px;
+            border: 0px;
+        }
+    </style>
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no" />
+    <!--모바일페이지크기조절메타태그-->
+    <title>Streams Sheet</title>
+    <script>
+        var selected_number_id = -1
+        var numbers = new Array()
+        numbers[0] = 1
+        numbers[1] = 2
+        numbers[2] = 3
+        numbers[3] = 4
+        numbers[4] = 5
+        numbers[5] = 6
+        numbers[6] = 7
+        numbers[7] = 8
+        numbers[8] = 9
+        numbers[9] = 10
+        numbers[10] = 11
+        numbers[11] = 11
+        numbers[12] = 12
+        numbers[13] = 12
+        numbers[14] = 13
+        numbers[15] = 13
+        numbers[16] = 14
+        numbers[17] = 14
+        numbers[18] = 15
+        numbers[19] = 15
+        numbers[20] = 16
+        numbers[21] = 16
+        numbers[22] = 17
+        numbers[23] = 17
+        numbers[24] = 18
+        numbers[25] = 18
+        numbers[26] = 19
+        numbers[27] = 19
+        numbers[28] = 20
+        numbers[29] = 21
+        numbers[30] = 22
+        numbers[31] = 23
+        numbers[32] = 24
+        numbers[33] = 25
+        numbers[34] = 26
+        numbers[35] = 27
+        numbers[36] = 28
+        numbers[37] = 29
+        numbers[38] = 30
+        numbers[39] = "*"
+
+        var scores = new Array()
+        scores[1] = 0
+        scores[2] = 1
+        scores[3] = 3
+        scores[4] = 5
+        scores[5] = 7
+        scores[6] = 9
+        scores[7] = 11
+        scores[8] = 15
+        scores[9] = 20
+        scores[10] = 25
+        scores[11] = 30
+        scores[12] = 35
+        scores[13] = 40
+        scores[14] = 50
+        scores[15] = 60
+        scores[16] = 70
+        scores[17] = 80
+        scores[18] = 100
+        scores[19] = 150
+        scores[20] = 300
+
+        var checked_rooms = new Array()
+        for (let index = 0; index < 20; index++) {
+            checked_rooms[index] = false
+        }
+
+        var checked_numbers = new Array()
+        for (let index = 0; index < 40; index++) {
+            checked_numbers[index] = false
+        }
+
+        var score_saved = new Array()
+
+        var star_location = -1
+    </script>
+</head>
+
+<body>
+    <p id="main"></p>
+
+    <table>
+        <tr>
+            <td onClick="input_number(0)" id="room0">?</td>
+            <td onClick="input_number(1)" id="room1">?</td>
+            <td onClick="input_number(2)" id="room2">?</td>
+            <td onClick="input_number(3)" id="room3">?</td>
+            <td onClick="input_number(4)" id="room4">?</td>
+            <td onClick="input_number(5)" id="room5">?</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd ">9</td>
+            <td class="emptytd ">+20</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(6)" id="room6">?</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd ">10</td>
+            <td class="emptytd ">+25</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd ">1</td>
+            <td class="emptytd ">+0</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(7)" id="room7">?</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd ">11</td>
+            <td class="emptytd ">+30</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd ">2</td>
+            <td class="emptytd ">+1</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(8)" id="room8">?</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd ">12</td>
+            <td class="emptytd ">+35</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd ">3</td>
+            <td class="emptytd ">+3</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(9)" id="room9">?</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd ">13</td>
+            <td class="emptytd ">+40</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd ">4</td>
+            <td class="emptytd ">+5</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(10)" id="room10">?</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd ">14</td>
+            <td class="emptytd ">+50</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd ">5</td>
+            <td class="emptytd ">+7</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(11)" id="room11">?</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd ">15</td>
+            <td class="emptytd ">+60</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd ">6</td>
+            <td class="emptytd ">+9</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(12)" id="room12">?</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td class="emptytd ">16</td>
+            <td class="emptytd ">+70</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd ">7</td>
+            <td class="emptytd ">+11</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(13)" id="room13">?</td>
+        </tr>
+        <tr>
+            <td class="emptytd "></td>
+            <td class="emptytd ">8</td>
+            <td class="emptytd ">+15</td>
+            <td class="emptytd "></td>
+            <td class="emptytd "></td>
+            <td onClick="input_number(14)" id="room14">?</td>
+            <td onClick="input_number(15)" id="room15">?</td>
+            <td onClick="input_number(16)" id="room16">?</td>
+            <td onClick="input_number(17)" id="room17">?</td>
+            <td onClick="input_number(18)" id="room18">?</td>
+            <td onClick="input_number(19)" id="room19">?</td>
+        </tr>
+    </table>
+
+    <p id="pallete">
+        <input type="button" id="btn_cal" value=" Calculate Score " style="font-size:100%;     background-color: #000;
+            font-family: 'Aclonica';
+            color:#fff;
+            padding: 15px 0;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            cursor: pointer;" onClick="calculate()" /></p>
+    <h1 id="score_area"></h1>
+
+</body>
+
+<script>
+    var mainid = "main"
+    for (let index = 0; index < 40; index++) {
+
+        var button = document.createElement('input');
+        button.setAttribute("type", "button")
+        button.setAttribute("id", "numbers" + index)
+        button.setAttribute("value", numbers[index])
+        button.setAttribute("style", "font-size:100%; background-color: #000; color: #fff;")
+        button.setAttribute("onClick", "select_number(" + index + ")")
+        document.getElementById(mainid).appendChild(button)
+
+        var space = document.createElement('span')
+        space.innerHTML = " "
+        document.getElementById(mainid).appendChild(space)
+    }
+
+    function input_number(aNumber) {
+        if (selected_number_id == -1 || checked_rooms[aNumber] == true) {
+            return
+        }
+        var box = document.getElementById("room" + aNumber)
+        box.innerHTML = document.getElementById("numbers" + selected_number_id).value
+
+        var button = document.getElementById("numbers" + selected_number_id)
+        button.setAttribute("style", "font-size:100%; background-color: #fff; color: #000;")
+        checked_numbers[selected_number_id] = true
+        selected_number_id = -1
+        checked_rooms[aNumber] = true
+        if (box.innerHTML == '*') {
+            if (aNumber == 0) {
+                score_saved[0] = -1
+            } else if (aNumber == 19) {
+                score_saved[19] = 31
+            } else {
+                star_location = aNumber
+            }
+        } else {
+            score_saved[aNumber] = Number(box.innerHTML)
+        }
+    }
+
+    function select_number(aNumber) {
+        if (checked_numbers[aNumber] == true) {
+            return
+        }
+        if (selected_number_id != -1) {
+            var button = document.getElementById("numbers" + selected_number_id)
+            button.setAttribute("style", "font-size:100%; background-color: #000; color: #fff;")
+        }
+        var button = document.getElementById("numbers" + aNumber)
+        button.setAttribute("style", "font-size:100%; background-color: #aaa; color: #000;")
+        selected_number_id = aNumber
+    }
+
+    var colors = new Array()
+    colors[0] = "LIGHTSALMON"
+    colors[1] = "YELLOWGREEN"
+    colors[2] = "LIGHTCYAN"
+    colors[3] = "WHEAT"
+    colors[4] = "LAVENDERBLUSH"
+    colors[5] = "ROYALBLUE"
+    colors[6] = "MEDIUMPURPLE"
+
+
+    function calculate() {
+        if (star_location != -1) {
+
+            if (score_saved[star_location - 1] <= score_saved[star_location + 1]) {
+                score_saved[star_location] = score_saved[star_location - 1]
+            } else {
+                var former = 1
+                var latter = 1
+                for (let index = star_location - 2; index >= 0; index--) {
+                    if (score_saved[index] > score_saved[index + 1]) {
+                        break;
+                    }
+                    former++
+                }
+
+                for (let index = star_location + 2; index < 20; index++) {
+                    if (score_saved[index] < score_saved[index - 1]) {
+                        break;
+                    }
+                    latter++
+                }
+
+                if (former > latter) {
+                    score_saved[star_location] = score_saved[star_location - 1]
+                } else {
+                    score_saved[star_location] = score_saved[star_location + 1]
+                }
+            }
+
+        }
+
+        var cur_color_idx = 0;
+
+        var totalScore = 0
+        var curSequence = 1
+
+        var box = document.getElementById("room" + 0)
+        box.setAttribute("style", "background-color:" + colors[cur_color_idx])
+
+
+        for (let index = 1; index < 20; index++) {
+            if (score_saved[index - 1] <= score_saved[index]) {
+                curSequence++
+            } else {
+                if (scores[curSequence] > 0) {
+                    var p_values = document.createElement("span")
+                    p_values.setAttribute("style", "color:" + colors[cur_color_idx])
+                    p_values.innerHTML = " + " + scores[curSequence]
+                    document.getElementById("score_area").appendChild(p_values)
+                }
+                totalScore += scores[curSequence]
+                curSequence = 1
+                cur_color_idx++
+                if (cur_color_idx == 7) {
+                    cur_color_idx = 0
+                }
+
+            }
+            var box_inner = document.getElementById("room" + index)
+            box_inner.setAttribute("style", "background-color:" + colors[cur_color_idx])
+
+        }
+
+        if (scores[curSequence] > 0) {
+            var p_values = document.createElement("span")
+            p_values.setAttribute("style", "color:" + colors[cur_color_idx])
+            p_values.innerHTML = "+" + scores[curSequence]
+            document.getElementById("score_area").appendChild(p_values)
+        }
+        totalScore += scores[curSequence]
+
+        var p_values = document.createElement("span")
+        p_values.innerHTML = " = " + totalScore
+        document.getElementById("score_area").appendChild(p_values)
+
+
+
+
+    }
+</script>
+
+</html>
